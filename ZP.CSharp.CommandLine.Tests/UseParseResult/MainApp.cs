@@ -13,9 +13,9 @@ namespace ZP.CSharp.CommandLine.Tests.UseParseResult
     {
         public Command Command
         {
-            get => CommandFactory.NewRoot()
+            get => new RootCommand()
                 .WithOption(new Option<bool>(new[]{"-v", "--verbose"}, "verbose"), true)
-                .WithCommand(CommandFactory.New("ha", "To ha or not to ha, that's the question.")
+                .WithCommand(new Command("ha", "To ha or not to ha, that's the question.")
                     .WithArgument(new Argument<int>("times", "times to ha"))
                     .WithOption(new Option<string>("--lang", "language to ha in"))
                     .WithHandler(MainApp.Ha))
