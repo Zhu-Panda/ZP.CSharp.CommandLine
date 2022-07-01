@@ -6,8 +6,6 @@ namespace ZP.CSharp.CommandLine.Factories
 {
     public static class CommandFactory
     {
-        public static Command NewRoot(string description = "") => new RootCommand(description);
-        public static Command New(string name = "", string description = "") => new Command(name, description);
         public static RootCommand ToRoot(this Command command)
         {
             if (command is RootCommand commandAsRoot)
