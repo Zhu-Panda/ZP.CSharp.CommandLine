@@ -1,8 +1,8 @@
 using System;
 using System.CommandLine;
 using System.CommandLine.NamingConventionBinder;
-using ZP.CSharp.CommandLine;
-namespace ZP.CSharp.CommandLine
+using ZP.CSharp.CommandLine.Factories;
+namespace ZP.CSharp.CommandLine.Factories
 {
     public static class CommandFactory
     {
