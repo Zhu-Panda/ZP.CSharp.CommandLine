@@ -1,6 +1,6 @@
 ﻿using System;
-using ZP.CSharp.CommandLine.Tests;
-namespace ZP.CSharp.CommandLine.Tests
+using ZP.CSharp.CommandLine.Tests.InvokeParser;
+namespace ZP.CSharp.CommandLine.Tests.InvokeParser
 {
     public class Program
     {
