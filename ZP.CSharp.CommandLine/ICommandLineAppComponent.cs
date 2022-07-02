@@ -10,5 +10,7 @@ namespace ZP.CSharp.CommandLine
         public Command Command {get;}
         public CommandLineBuilder Builder {get;}
         public Parser Parser {get;}
+        public int Invoke(string[] args);
+        public Task<int> InvokeAsync(string[] args);
     }
 }
