@@ -5,11 +5,10 @@ using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
 using ZP.CSharp.CommandLine.Factories;
 using ZP.CSharp.CommandLine.Builder;
-using ZP.CSharp.CommandLine.Strategies.InvokeParser;
-using ZP.CSharp.CommandLine.Tests;
-namespace ZP.CSharp.CommandLine.Tests
+using ZP.CSharp.CommandLine.Tests.InvokeParser;
+namespace ZP.CSharp.CommandLine.Tests.InvokeParser
 {
-    public class MainApp : IParserInvoker
+    public class MainApp : ICommandLineAppComponent
     {
         public Command Command
         {

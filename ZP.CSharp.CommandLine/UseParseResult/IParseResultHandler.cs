@@ -5,10 +5,6 @@ namespace ZP.CSharp.CommandLine.Strategies.UseParseResult
 {
     public interface IParseResultHandler : ICommandLineAppComponent
     {
-        public int Parse(string[] args);
-        public Task<int> ParseAsync(string[] args);
-        public void ConfigureFromParseResult(ParseResult result);
-        public int Run();
-        public Task<int> RunAsync();
+        public ParseResult ParseResult {get; set;}
     }
 }
