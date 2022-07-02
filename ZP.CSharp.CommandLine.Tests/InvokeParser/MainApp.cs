@@ -8,9 +8,9 @@ using ZP.CSharp.CommandLine.Builder;
 using ZP.CSharp.CommandLine.Tests.InvokeParser;
 namespace ZP.CSharp.CommandLine.Tests.InvokeParser
 {
-    public class MainApp : ICommandLineAppComponent
+    public class MainApp : CommandLineAppComponent<MainApp>
     {
-        public Command Command
+        public override Command Command
         {
             get => new RootCommand()
                 .WithOption(new Option<bool>(new[]{"-v", "--verbose"}, "verbose"), true)
@@ -20,11 +20,11 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
                     .WithHandler(MainApp.Ha))
                 .ToRoot();
         }
-        public CommandLineBuilder Builder
+        public override CommandLineBuilder Builder
         {
             get => new CommandLineBuilder(this.Command);
         }
-        public Parser Parser
+        public override Parser Parser
         {
             get => this.Builder.UseDefaultsWithHelp("-?", "--help").Build();
         }
@@ -38,13 +38,10 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
             };
             Console.WriteLine(hahahas);
         }
-        public int Invoke(string[] args)
+        public override int Invoke(string[] args) => this.Parser.Invoke(args);
+        public override Task<int> InvokeAsync(string[] args)
         {
-            return this.Parser.Invoke(args);
-        }
-        public async Task<int> InvokeAsync(string[] args)
-        {
-            return await new Task<int>(() => 0);
+            throw new NotSupportedException();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace ZP.CSharp.CommandLine
 {
     public interface ICommandLineAppComponent
     {
+        public string[] CommandLineArgs {get; init;}
         public Command Command {get;}
         public CommandLineBuilder Builder {get;}
         public Parser Parser {get;}

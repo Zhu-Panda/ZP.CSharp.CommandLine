@@ -4,7 +4,7 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
 {
     public class Program
     {
-        public static void Main(string[] args) => new MainApp().Invoke(args);
+        public static async Task Main(string[] args) => await MainApp.FromArgs(args).InvokeAsync();
     }
     
 }
