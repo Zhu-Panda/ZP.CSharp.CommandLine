@@ -17,9 +17,9 @@ namespace ZP.CSharp.CommandLine
         {
             return new T(){CommandLineArgs = args};
         }
-        public int Invoke() => this.Invoke(this.CommandLineArgs);
+        public virtual int Invoke() => this.Invoke(this.CommandLineArgs);
         public abstract int Invoke(string[] args);
-        public Task<int> InvokeAsync() => this.InvokeAsync(this.CommandLineArgs);
+        public virtual Task<int> InvokeAsync() => this.InvokeAsync(this.CommandLineArgs);
         public abstract Task<int> InvokeAsync(string[] args);
     }
 }
