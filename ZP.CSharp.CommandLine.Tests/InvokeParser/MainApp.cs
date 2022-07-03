@@ -19,7 +19,7 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
                     .WithArgument(new Argument<int>("times", "times to ha"))
                     .WithOption(new Option<string>("--lang", "language to ha in"))
                     .WithHandler(MainApp.Ha))
-                .WithHandler(this.Main)
+                .WithHandler(MainApp.Main)
                 .ToRoot();
         }
         public override CommandLineBuilder Builder
@@ -30,7 +30,7 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
         {
             get => this.Builder.UseDefaultsWithHelp("-?", "--help").Build();
         }
-        public void Main(bool info)
+        public static void Main(bool info)
         {
             if (info)
             {
@@ -38,7 +38,7 @@ namespace ZP.CSharp.CommandLine.Tests.InvokeParser
             }
             else
             {
-                this.Invoke(new[]{"-?"});
+                FromArgs(new[]{"-?"}).Invoke();
             }
         }
         public static void Ha(int times, string lang, bool info)
