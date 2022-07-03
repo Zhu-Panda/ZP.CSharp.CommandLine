@@ -20,5 +20,7 @@ namespace ZP.CSharp.CommandLine.UseParseResult
             this.ParseResult = this.Parser.Parse(this.CommandLineArgs);
             return ((T) this);
         }
+        public override int Invoke(string[] args) => this.CommandLineArgs == args ? this.ParseResult.Invoke() : FromArgs(args).Invoke();
+        public override Task<int> InvokeAsync(string[] args) => this.CommandLineArgs == args ? this.ParseResult.InvokeAsync() : FromArgs(args).SetParseResult().InvokeAsync();
     }
 }
