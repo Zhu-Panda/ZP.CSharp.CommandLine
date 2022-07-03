@@ -5,27 +5,29 @@ using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
 using ZP.CSharp.CommandLine.Factories;
 using ZP.CSharp.CommandLine.Builder;
-using ZP.CSharp.CommandLine.Strategies.UseParseResult;
+using ZP.CSharp.CommandLine.UseParseResult;
 using ZP.CSharp.CommandLine.Tests.UseParseResult;
 namespace ZP.CSharp.CommandLine.Tests.UseParseResult
 {
-    public class MainApp : IParseResultHandler
+    public class MainApp : ParseResultHandler<MainApp>
     {
-        public Command Command
+        public static Option<bool> InfoOption = new Option<bool>("--info", "print info");
+        public override Command Command
         {
             get => new RootCommand()
-                .WithOption(new Option<bool>(new[]{"-v", "--verbose"}, "verbose"), true)
+                .WithOption(InfoOption, true)
                 .WithCommand(new Command("ha", "To ha or not to ha, that's the question.")
                     .WithArgument(new Argument<int>("times", "times to ha"))
                     .WithOption(new Option<string>("--lang", "language to ha in"))
                     .WithHandler(MainApp.Ha))
+                .WithHandler(() => this.Invoke(new[]{"-?"}))
                 .ToRoot();
         }
-        public CommandLineBuilder Builder
+        public override CommandLineBuilder Builder
         {
             get => new CommandLineBuilder(this.Command);
         }
-        public Parser Parser
+        public override Parser Parser
         {
             get => this.Builder.UseDefaultsWithHelp("-?", "--help").Build();
         }
@@ -39,26 +41,25 @@ namespace ZP.CSharp.CommandLine.Tests.UseParseResult
             };
             Console.WriteLine(hahahas);
         }
-
-        public void ConfigureFromParseResult(ParseResult result)
+        public static void PrintInfo()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("This is a test info delivered to you using ParseResult.");
         }
-        public int Parse(string[] args)
+        public override int Invoke(string[] args)
         {
-            throw new NotImplementedException();
+            if (this.ParseResult.HasOption(InfoOption))
+            {
+                PrintInfo();
+                return 0;
+            }
+            else
+            {
+                return base.Invoke(args);
+            }
         }
-        public async Task<int> ParseAsync(string[] args)
+        public override Task<int> InvokeAsync(string[] args)
         {
-            return await new Task<int>(() => 0);
-        }
-        public int Run()
-        {
-            throw new NotImplementedException();
-        }
-        public async Task<int> RunAsync()
-        {
-            return await new Task<int>(() => 0);
+            throw new NotSupportedException();
         }
     }
 }

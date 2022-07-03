@@ -4,7 +4,6 @@ namespace ZP.CSharp.CommandLine.Tests.UseParseResult
 {
     public class Program
     {
-        public static void Main(string[] args) => new MainApp().Parse(args);
+        public static void Main(string[] args) => MainApp.FromArgs(args).Invoke();
     }
-    
 }
