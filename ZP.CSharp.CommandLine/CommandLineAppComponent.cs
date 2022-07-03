@@ -5,7 +5,8 @@ using System.CommandLine.Parsing;
 using ZP.CSharp.CommandLine;
 namespace ZP.CSharp.CommandLine
 {
-    public abstract class CommandLineAppComponent<T> : ICommandLineAppComponent where T : CommandLineAppComponent<T>, new()
+    public abstract class CommandLineAppComponent<T> : ICommandLineAppComponent
+        where T : CommandLineAppComponent<T>, new()
     {
         #pragma warning disable CS8618
         public string[] CommandLineArgs {get; init;}
@@ -18,8 +19,8 @@ namespace ZP.CSharp.CommandLine
             return new T(){CommandLineArgs = args};
         }
         public virtual int Invoke() => this.Invoke(this.CommandLineArgs);
-        public abstract int Invoke(string[] args);
+        public virtual int Invoke(string[] args) => this.Parser.Invoke(args);
         public virtual Task<int> InvokeAsync() => this.InvokeAsync(this.CommandLineArgs);
-        public abstract Task<int> InvokeAsync(string[] args);
+        public virtual Task<int> InvokeAsync(string[] args) => this.Parser.InvokeAsync(args);
     }
 }
