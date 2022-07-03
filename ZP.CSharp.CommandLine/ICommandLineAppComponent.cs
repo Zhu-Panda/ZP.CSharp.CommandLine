@@ -5,10 +5,9 @@ using System.CommandLine.Parsing;
 using ZP.CSharp.CommandLine;
 namespace ZP.CSharp.CommandLine
 {
-    public interface ICommandLineAppComponent
+    public interface ICommandLineAppComponent : ICommandProvider
     {
         public string[] CommandLineArgs {get; init;}
-        public Command Command {get;}
         public CommandLineBuilder Builder {get;}
         public Parser Parser {get;}
         public int Invoke(string[] args);
