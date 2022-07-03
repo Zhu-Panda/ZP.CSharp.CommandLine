@@ -11,10 +11,7 @@ namespace ZP.CSharp.CommandLine.UseParseResult
         #pragma warning disable CS8618
         public ParseResult ParseResult {get; set;}
         #pragma warning restore CS8618
-        public static new T FromArgs(string[] args)
-        {
-            return new T(){CommandLineArgs = args}.SetParseResult();
-        }
+        public static new T FromArgs(string[] args) => new T(){CommandLineArgs = args}.SetParseResult();
         private T SetParseResult()
         {
             this.ParseResult = this.Parser.Parse(this.CommandLineArgs);
